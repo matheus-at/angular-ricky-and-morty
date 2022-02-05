@@ -2,7 +2,9 @@
 
 @include mat-core();
 
-html,
+html {
+  scroll-behavior: smooth;
+}
 body {
   height: 100%;
 }

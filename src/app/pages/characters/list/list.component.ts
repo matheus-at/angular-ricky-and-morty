@@ -33,11 +33,17 @@ export class ListComponent implements OnInit {
     this.httpParams = this.httpParams.set('page', this.page + 1)
     this.page++
     this.listAllCharacters()
+    this.scrollToTop()
   }
 
   previousPage(): void {
     this.httpParams = this.httpParams.set('page', this.page - 1)
     this.page--
     this.listAllCharacters()
+    this.scrollToTop()
+  }
+
+  scrollToTop(): void {
+    window.scrollTo(0, 0)
   }
 }
