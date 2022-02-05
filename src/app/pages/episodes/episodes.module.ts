@@ -1,3 +1,4 @@
+import { AppMaterialModule } from './../../shared/app-material/app-material.module'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
@@ -6,6 +7,6 @@ import { ListComponent } from './list/list.component'
 
 @NgModule({
   declarations: [ListComponent],
-  imports: [CommonModule, EpisodesRoutingModule],
+  imports: [CommonModule, EpisodesRoutingModule, AppMaterialModule],
 })
 export class EpisodesModule {}
