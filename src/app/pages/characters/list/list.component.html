@@ -1,12 +1,26 @@
 <div class="cards-list">
   <a class="list-item" *ngFor="let character of characters">
-    <mat-card class="mat-card mat-focus-indicator character-card">
+    <mat-card class="mat-totalPagescard mat-focus-indicator mat-elevation-z4 character-card">
       <div class="img-wrapper">
         <img [src]="character.image" [alt]="character.name">
       </div>
       <div class="info-wrapper">
+        <mat-card-title>
+          {{character.name}}
+        </mat-card-title>
+
+        <mat-chip-list class="chip-list" aria-label="Color selection">
+          <mat-chip selected
+            [color]="character.status === 'Alive' ? 'accent' : character.status === 'Dead' ? 'warn' : 'none'">
+            {{character.status | titlecase}}
+          </mat-chip>
+          <span> - {{character.species}}</span>
+        </mat-chip-list>
         <mat-card-content>
-          <mat-card-title>{{character.name}}</mat-card-title>
+          <span class="location-text">Last known location:</span>
+          <h3>{{character.location.name}}</h3>
+          <span class="location-text">First seen in:</span>
+          <h3>{{character.origin.name}}</h3>
         </mat-card-content>
       </div>
       <mat-card-footer>
@@ -14,4 +28,14 @@
       </mat-card-footer>
     </mat-card>
   </a>
+</div>
+
+<div class="page-buttons">
+  <button [disabled]="page === 1" class="prev-button" mat-fab color="primary" aria-label="Next page"
+    (click)="previousPage()">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button [disabled]="page === totalPages" mat-fab color="primary" aria-label="Next page" (click)="nextPage()">
+    <mat-icon>navigate_next</mat-icon>
+  </button>
 </div>

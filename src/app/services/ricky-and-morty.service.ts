@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment'
 export class RickyAndMortyService {
   constructor(private _httpClient: HttpClient) {}
 
-  listAllCharacters(): Observable<any> {
-    return this._httpClient.get(`${environment.apiUrl}/character`)
+  listAllCharacters(params: HttpParams): Observable<any> {
+    return this._httpClient.get(`${environment.apiUrl}/character`, { params })
   }
 }

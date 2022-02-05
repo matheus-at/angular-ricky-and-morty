@@ -6,7 +6,8 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatRippleModule } from '@angular/material/core'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-
+import { MatChipsModule } from '@angular/material/chips'
+import { MatIconModule } from '@angular/material/icon'
 @NgModule({
   exports: [
     MatToolbarModule,
@@ -16,6 +17,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     MatProgressBarModule,
     MatRippleModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatIconModule,
   ],
 })
 export class AppMaterialModule {}
