@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-list',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  constructor() {}
+  constructor(private _title: Title) {
+    this._title.setTitle('Ricky and Morty | Episodes')
+  }
 
   ngOnInit(): void {}
 }

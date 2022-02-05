@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
+import { Title } from '@angular/platform-browser'
 
 import { Character } from './../../../models/character'
 import { RickyAndMortyService } from './../../../services/ricky-and-morty.service'
@@ -16,9 +17,10 @@ export class ListComponent implements OnInit {
   httpParams: HttpParams = new HttpParams()
   characters: Character[] = []
 
-  constructor(private _rickyAndMortyService: RickyAndMortyService) {}
+  constructor(private _rickyAndMortyService: RickyAndMortyService, private _title: Title) {}
 
   ngOnInit(): void {
+    this._title.setTitle('Ricky and Morty | Characters')
     this.httpParams = this.httpParams.set('page', this.page)
     this.listAllCharacters()
   }
