@@ -8,6 +8,7 @@ import { MatRippleModule } from '@angular/material/core'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatChipsModule } from '@angular/material/chips'
 import { MatIconModule } from '@angular/material/icon'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 @NgModule({
   exports: [
     MatToolbarModule,
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon'
     MatSnackBarModule,
     MatChipsModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AppMaterialModule {}

@@ -12,6 +12,7 @@ import { RickyAndMortyService } from './../../../services/ricky-and-morty.servic
 export class ListComponent implements OnInit {
   page: number = 1
   totalPages: number = 0
+  loading: boolean = false
   httpParams: HttpParams = new HttpParams()
   characters: Character[] = []
 
@@ -23,9 +24,12 @@ export class ListComponent implements OnInit {
   }
 
   listAllCharacters(): void {
+    this.loading = true
+
     this._rickyAndMortyService.listAllCharacters(this.httpParams).subscribe((response) => {
       this.totalPages = response.info.pages
       this.characters = response.results
+      this.loading = false
     })
   }
 
