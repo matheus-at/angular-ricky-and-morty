@@ -1,3 +1,5 @@
+import { RickAndMortyService } from './../../../services/rick-and-morty.service'
+import { HttpParams } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 import { Title } from '@angular/platform-browser'
 
@@ -7,9 +9,46 @@ import { Title } from '@angular/platform-browser'
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  constructor(private _title: Title) {
-    this._title.setTitle('Ricky and Morty | Locations')
+  httpParams: HttpParams = new HttpParams()
+  loading: boolean = false
+  page: number = 1
+  totalPages: number = 0
+  columns: string[] = ['name', 'type', 'dimension']
+  locations: Location[] = []
+
+  constructor(private _title: Title, private _rickAndMortyService: RickAndMortyService) {
+    this._title.setTitle('Rick and Morty | Locations')
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listAllLocations()
+  }
+
+  listAllLocations(): void {
+    this.loading = true
+
+    this._rickAndMortyService.listAllLocations(this.httpParams).subscribe((response) => {
+      this.totalPages = response.info.pages
+      this.locations = response.results
+      this.loading = false
+    })
+  }
+
+  nextPage(): void {
+    this.httpParams = this.httpParams.set('page', this.page + 1)
+    this.page++
+    this.listAllLocations()
+    this.scrollToTop()
+  }
+
+  previousPage(): void {
+    this.httpParams = this.httpParams.set('page', this.page - 1)
+    this.page--
+    this.listAllLocations()
+    this.scrollToTop()
+  }
+
+  scrollToTop(): void {
+    window.scrollTo(0, 0)
+  }
 }

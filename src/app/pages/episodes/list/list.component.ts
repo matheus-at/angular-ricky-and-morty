@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser'
 })
 export class ListComponent implements OnInit {
   constructor(private _title: Title) {
-    this._title.setTitle('Ricky and Morty | Episodes')
+    this._title.setTitle('Rick and Morty | Episodes')
   }
 
   ngOnInit(): void {}

@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular-ricky-and-morty'
+  title = 'angular-rick-and-morty'
 
   constructor(private _snackBar: MatSnackBar) {}
 

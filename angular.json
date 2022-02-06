@@ -7,7 +7,7 @@
     "defaultCollection": "@angular-eslint/schematics"
   },
   "projects": {
-    "angular-ricky-and-morty": {
+    "angular-rick-and-morty": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-ricky-and-morty",
+            "outputPath": "dist/angular-rick-and-morty",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -77,10 +77,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-ricky-and-morty:build:production"
+              "browserTarget": "angular-rick-and-morty:build:production"
             },
             "development": {
-              "browserTarget": "angular-ricky-and-morty:build:development"
+              "browserTarget": "angular-rick-and-morty:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-ricky-and-morty:build"
+            "browserTarget": "angular-rick-and-morty:build"
           }
         },
         "test": {
@@ -122,5 +122,5 @@
       }
     }
   },
-  "defaultProject": "angular-ricky-and-morty"
+  "defaultProject": "angular-rick-and-morty"
 }
