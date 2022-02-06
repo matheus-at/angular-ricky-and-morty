@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 <app-cool-loading-phrase [loading]="loading"></app-cool-loading-phrase>
 
-<div class="content">
+<div class="content" *ngIf="!loading">
   <table mat-table [dataSource]="locations" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -23,7 +23,7 @@
   </table>
 </div>
 
-<div class="page-buttons">
+<div class="page-buttons" *ngIf="!loading">
   <button [disabled]="page === 1" class="prev-button" mat-fab color="primary" aria-label="Next page"
     (click)="previousPage()">
     <mat-icon>navigate_before</mat-icon>
