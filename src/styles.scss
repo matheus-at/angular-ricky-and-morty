@@ -2,6 +2,14 @@
 
 @include mat-core();
 
+$custom-app-primary: mat-palette($mat-teal);
+$custom-app-accent: mat-palette($mat-indigo, A200, A700);
+$custom-app-warn: mat-palette($mat-red);
+
+$custom-theme: mat-dark-theme($custom-app-primary, $custom-app-accent, $custom-app-warn);
+
+@include angular-material-theme($custom-theme);
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,4 +19,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.active-route {
+  color: teal;
 }

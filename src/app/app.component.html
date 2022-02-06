@@ -5,9 +5,9 @@
     </button>
   </mat-toolbar-row>
   <mat-toolbar-row class="toolbar-center">
-    <button mat-button [routerLink]="'/characters'">Characters</button>
-    <button mat-button [routerLink]="'/locations'">Locations</button>
-    <button mat-button [routerLink]="'/episodes'">Episodes</button>
+    <button mat-button [routerLink]="'/characters'" routerLinkActive="active-route">Characters</button>
+    <button mat-button [routerLink]="'/locations'" routerLinkActive="active-route">Locations</button>
+    <button mat-button [routerLink]="'/episodes'" routerLinkActive="active-route">Episodes</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
