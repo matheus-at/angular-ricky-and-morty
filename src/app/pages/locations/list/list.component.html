@@ -25,10 +25,11 @@
 
 <div class="page-buttons" *ngIf="!loading">
   <button [disabled]="page === 1" class="prev-button" mat-fab color="primary" aria-label="Next page"
-    (click)="previousPage()">
+    matTooltip="Go to the previous page" (click)="previousPage()">
     <mat-icon>navigate_before</mat-icon>
   </button>
-  <button [disabled]="page === totalPages" mat-fab color="primary" aria-label="Next page" (click)="nextPage()">
+  <button [disabled]="page === totalPages" mat-fab color="primary" aria-label="Next page"
+    matTooltip="Go to the next page" (click)="nextPage()">
     <mat-icon>navigate_next</mat-icon>
   </button>
 </div>
