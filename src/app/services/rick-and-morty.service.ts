@@ -16,4 +16,8 @@ export class RickAndMortyService {
   listAllLocations(params: HttpParams): Observable<any> {
     return this._httpClient.get(`${environment.apiUrl}/location`, { params })
   }
+
+  getMultipleCharacters(ids: number[]): Observable<any> {
+    return this._httpClient.get(`${environment.apiUrl}/character/${ids}`)
+  }
 }

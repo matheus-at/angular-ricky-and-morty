@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Residents in {{data.location.name}}</h2>
+<h4 *ngIf="data.characters.length">Total: {{data.characters.length}}</h4>
+<mat-dialog-content>
+  <div *ngIf="data.characters.length">
+    <div class="cards-list" *ngFor="let character of data.characters">
+      <app-cool-character-card [character]="character"></app-cool-character-card>
+    </div>
+  </div>
+  <h4 *ngIf="!data.characters.length">There are no residents in {{data.location.name}} woww :o</h4>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
