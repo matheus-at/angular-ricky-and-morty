@@ -1,5 +1,4 @@
 <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-<app-cool-loading-phrase [loading]="loading"></app-cool-loading-phrase>
 
 <div class="content" *ngIf="!loading">
   <table mat-table [dataSource]="locations" class="mat-elevation-z8">

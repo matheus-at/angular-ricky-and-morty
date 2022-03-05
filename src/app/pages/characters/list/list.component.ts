@@ -27,12 +27,10 @@ export class ListComponent implements OnInit {
 
   listAllCharacters(): void {
     this.loading = true
-
     this._rickAndMortyService.listAllCharacters(this.httpParams).subscribe((response) => {
       this.totalPages = response.info.pages
       this.characters = response.results
-      // So we can see the cool loading animation =)
-      setTimeout(() => (this.loading = false), 500)
+      this.loading = false
     })
   }
 
