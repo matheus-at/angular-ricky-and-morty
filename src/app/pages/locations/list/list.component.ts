@@ -32,7 +32,6 @@ export class ListComponent implements OnInit {
 
   listAllLocations(): void {
     this.loading = true
-
     this._rickAndMortyService.listAllLocations(this.httpParams).subscribe((response) => {
       this.totalPages = response.info.pages
       this.locations = response.results

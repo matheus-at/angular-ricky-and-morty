@@ -17,11 +17,11 @@ export class ListComponent implements OnInit {
   httpParams: HttpParams = new HttpParams()
   characters: Character[] = []
 
-  constructor(private _rickAndMortyService: RickAndMortyService, private _title: Title) {}
+  constructor(private _title: Title, private _rickAndMortyService: RickAndMortyService) {
+    this._title.setTitle('Rick and Morty | Characters')
+  }
 
   ngOnInit(): void {
-    this._title.setTitle('Rick and Morty | Characters')
-    this.httpParams = this.httpParams.set('page', this.page)
     this.listAllCharacters()
   }
 
