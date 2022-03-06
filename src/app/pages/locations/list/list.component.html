@@ -1,44 +1,28 @@
 <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-
-<div class="content" *ngIf="!loading">
-  <table mat-table [dataSource]="locations" class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="dimension">
-      <th mat-header-cell *matHeaderCellDef> Dimension </th>
-      <td mat-cell *matCellDef="let element"> {{element.dimension}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" aria-label="Characters" matTooltip="Show residents"
-          (click)="listAllResidents(element)">
-          <mat-icon class="action-icon">person_pin_circle</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
-  </table>
+<div class="filter">
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Locations</mat-label>
+      <input type="text" placeholder="Pick one" aria-label="Locations" matInput [formControl]="locationFilterControl"
+        [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText"
+        (optionSelected)="handleLocationFilterChange($event)">
+        <mat-option *ngFor="let option of filteredLocations" [value]="option">
+          {{option.name}} | {{option.dimension}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 </div>
 
-<div class="page-buttons" *ngIf="!loading">
-  <button [disabled]="page === 1" class="prev-button" mat-fab color="primary" aria-label="Next page"
-    matTooltip="Go to the previous page" (click)="previousPage()">
-    <mat-icon>navigate_before</mat-icon>
-  </button>
-  <button [disabled]="page === totalPages" mat-fab color="primary" aria-label="Next page"
-    matTooltip="Go to the next page" (click)="nextPage()">
-    <mat-icon>navigate_next</mat-icon>
-  </button>
+<div class="location-info" *ngIf="locationFilterControl?.value?.id">
+  <h1>Location name: {{locationFilterControl.value.name}}</h1>
+  <h2>Dimension: {{locationFilterControl.value.dimension}}</h2>
+  <h2>Total residents: {{locationFilterControl.value.residents.length}}</h2>
+</div>
+
+<div class="cards-list">
+  <a class="list-item" *ngFor="let character of characters">
+    <app-cool-character-card [character]="character"></app-cool-character-card>
+  </a>
 </div>

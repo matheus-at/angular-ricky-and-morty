@@ -64,8 +64,12 @@ export class ListComponent implements OnInit {
   handleEpisodeFilterChange(event: MatAutocompleteSelectedEvent): void {
     const episode = event.option.value as Episode
     const characterIds = getIdsFromURLs(episode.characters)
-    this._rickAndMortyService.getMultipleCharacters(characterIds).subscribe((characters) => {
-      this.characters = characters
+    this._rickAndMortyService.getMultipleCharacters(characterIds).subscribe((response) => {
+      if (Array.isArray(response)) {
+        this.characters = response
+      } else {
+        this.characters = [{ ...response }]
+      }
     })
   }
 }

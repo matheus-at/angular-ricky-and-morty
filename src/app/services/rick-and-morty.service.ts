@@ -13,8 +13,8 @@ export class RickAndMortyService {
     return this._httpClient.get(`${environment.apiUrl}/character`, { params })
   }
 
-  listAllLocations(params: HttpParams): Observable<any> {
-    return this._httpClient.get(`${environment.apiUrl}/location`, { params })
+  listAllLocations(): Observable<any> {
+    return this._httpClient.get(`${environment.apiUrl}/location`)
   }
 
   listAllEpisodes(): Observable<any> {

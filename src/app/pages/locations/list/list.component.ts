@@ -1,72 +1,72 @@
 import { HttpParams } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
+import { FormControl } from '@angular/forms'
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { Title } from '@angular/platform-browser'
-import { map } from 'lodash'
+import { RickAndMortyService } from 'src/app/services/rick-and-morty.service'
+import { getIdsFromURLs } from 'src/app/utils/utils'
 
 import { Character } from './../../../models/character'
 import { Location } from './../../../models/location'
-import { RickAndMortyService } from './../../../services/rick-and-morty.service'
-import { DialogCharactersComponent } from './../dialog-characters/dialog-characters.component'
 
+/**
+ * @title List all characters from the selected location
+ */
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  httpParams: HttpParams = new HttpParams()
-  loading: boolean = false
   page: number = 1
   totalPages: number = 0
-  columns: string[] = ['name', 'type', 'dimension', 'actions']
+  loading: boolean = false
+  httpParams: HttpParams = new HttpParams()
+  locationFilterControl = new FormControl()
   locations: Location[] = []
+  filteredLocations: Location[] = []
+  characters: Character[] = []
 
-  constructor(private _title: Title, private _rickAndMortyService: RickAndMortyService, public _dialog: MatDialog) {
+  constructor(private _title: Title, private _rickAndMortyService: RickAndMortyService) {
     this._title.setTitle('Rick and Morty | Locations')
   }
 
   ngOnInit(): void {
-    this.listAllLocations()
+    this._listAllLocations()
+
+    this.locationFilterControl.valueChanges.subscribe((value) => this._filter(value))
   }
 
-  listAllLocations(): void {
-    this.loading = true
-    this._rickAndMortyService.listAllLocations(this.httpParams).subscribe((response) => {
-      this.totalPages = response.info.pages
+  private _listAllLocations(): void {
+    this._rickAndMortyService.listAllLocations().subscribe((response) => {
       this.locations = response.results
-      this.loading = false
+      this.filteredLocations = this.locations
     })
   }
 
-  nextPage(): void {
-    this.httpParams = this.httpParams.set('page', this.page + 1)
-    this.page++
-    this.listAllLocations()
-    this.scrollToTop()
+  private _filter(value: any): void {
+    if (!value || value.id) {
+      this.filteredLocations = [...this.locations]
+      this.characters = []
+    } else {
+      const filterValue = value.toLowerCase()
+      this.filteredLocations = this.locations.filter((option) => option.name.toLowerCase().includes(filterValue))
+    }
   }
 
-  previousPage(): void {
-    this.httpParams = this.httpParams.set('page', this.page - 1)
-    this.page--
-    this.listAllLocations()
-    this.scrollToTop()
+  getOptionText(location: Location): string {
+    return location ? `${location.name} | ${location.dimension}` : ''
   }
 
-  scrollToTop(): void {
-    window.scrollTo(0, 0)
-  }
-
-  listAllResidents(location: Location): void {
-    const { residents: urls } = location
-    // Make an array of character ids from residents urls in location
-    const residentsIds = map(urls, (url: string) => Number(url.split('/').pop()))
-    this._rickAndMortyService.getMultipleCharacters(residentsIds).subscribe((characters) => {
-      this.openDialogCharacters(characters, location)
+  handleLocationFilterChange(event: MatAutocompleteSelectedEvent): void {
+    const location = event.option.value as Location
+    const characterIds = getIdsFromURLs(location.residents)
+    this._rickAndMortyService.getMultipleCharacters(characterIds).subscribe((response) => {
+      if (Array.isArray(response)) {
+        this.characters = response
+      } else {
+        this.characters = [{ ...response }]
+      }
     })
-  }
-
-  openDialogCharacters(characters: Character[], location: Location) {
-    this._dialog.open(DialogCharactersComponent, { data: { characters, location } })
   }
 }
