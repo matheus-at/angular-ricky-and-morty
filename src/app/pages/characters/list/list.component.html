@@ -6,13 +6,16 @@
   </a>
 </div>
 
-<div class="page-buttons" *ngIf="!loading">
-  <button [disabled]="page === 1" class="prev-button" mat-fab color="primary" aria-label="Next page"
-    matTooltip="Go to the previous page" (click)="previousPage()">
-    <mat-icon>navigate_before</mat-icon>
-  </button>
-  <button [disabled]="page === totalPages" mat-fab color="primary" aria-label="Next page"
-    matTooltip="Go to the next page" (click)="nextPage()">
-    <mat-icon>navigate_next</mat-icon>
-  </button>
+<div class="footer">
+  <div class="page-buttons" *ngIf="!loading">
+    <button mat-icon-button [disabled]="page === 1" color="primary" aria-label="Next page"
+      matTooltip="Go to the previous page" (click)="previousPage()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <div class="pages-info">Page {{page}} of {{totalPages}}</div>
+    <button mat-icon-button [disabled]="page === totalPages" color="primary" aria-label="Next page"
+      matTooltip="Go to the next page" (click)="nextPage()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
 </div>
